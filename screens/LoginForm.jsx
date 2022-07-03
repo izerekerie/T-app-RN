@@ -1,0 +1,79 @@
+import React,{useState} from 'react'
+import Axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { View,TextInput,Text,TouchableOpacity, StyleSheet } from 'react-native'
+import URLB from '../util'
+export default function LoginForm({navigation}) {
+   const [email,setEmail]=useState('');
+   const [password,setPassword]=useState('');
+  
+    const setData=async(user)=>{
+       
+await  AsyncStorage.setItem("username",JSON.stringify(user.existingUser.name))
+await  AsyncStorage.setItem("token",JSON.stringify(user.token))
+    }
+   
+
+
+    const handleSubmit= async()=>{
+        await Axios.post(`${URLB}/users/signin`,{email,password}).then(
+            (response)=>{
+                setData(response.data)
+               
+             setTimeout(()=>{navigation.navigate('home')},300)
+            }
+        ).catch((error)=>console.log(error.message.details[0]))
+    }
+  return (
+    <View>
+
+        <Text style={{textAlign:'center',fontSize:20,fontWeight:'700',padding:10,color:'#1A124A'}}>Login Form</Text>
+        <TextInput
+         name="email"
+         value={email}
+         placeholder='enter email'
+         onChangeText={(val)=>setEmail(val)}
+         style={styles.input}
+        />
+         <TextInput
+         
+         name="password"
+         value={password}
+         placeholder='enter password'
+         onChangeText={(val)=>setPassword(val)}
+         style={styles.input}
+        />
+         <TouchableOpacity 
+         onPress={handleSubmit}
+          style={styles.button}
+         >
+            <Text style={{color:'#fff',textAlign:'center'}}>LOGIN</Text>
+         </TouchableOpacity>
+
+    </View>
+  )
+}
+
+const styles=StyleSheet.create({
+    input:{
+        padding:10,
+        width:'80%',
+        borderWidth:1,
+        borderColor:'#1A124A',
+        margin:10
+
+    },
+    container:{
+        flex:1,
+        alignItems:'center',
+        padding:10,
+        justifyContent:'center',
+      
+    },
+    button:{
+        backgroundColor:'#1A124A',
+        padding:10,
+        width:'80%',
+        margin:10
+    }
+})
