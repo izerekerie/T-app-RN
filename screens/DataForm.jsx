@@ -3,7 +3,7 @@ import { View ,Text,StyleSheet, TextInput,  TouchableOpacity } from 'react-nativ
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import Axios from 'axios'
-export default function AuthForm({navigation}) {
+export default function DataForm({navigation}) {
 const login=()=>{
     console.log("logggin")
       
@@ -26,7 +26,7 @@ const login=()=>{
         
         onSubmit={
           
-            ()=>navigation.navigate('tasks')
+            ()=>navigation.navigate('home')
         }
         >
           {({handleChange,handleSubmit,values,errors,isValid})=>(

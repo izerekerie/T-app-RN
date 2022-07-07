@@ -8,20 +8,26 @@ export default function AddTask({navigation}) {
   const [category,setCategory]=useState('')
   const [createdBy,setCreator]=useState(null)
   const [categories,setCats]=useState([]);
-
+  const [token,setToken]=useState('')
 
   const getAllCategories=async()=>{
     const user=await AsyncStorage.getItem('username');
+    const token=await AsyncStorage.getItem('token')
    setCreator(JSON.parse(user));
+   setToken(JSON.parse(token))
     await  Axios.get(`${URLB}/categories`).then((response)=>{
         setCats(response.data);
        }).catch((error)=>console.log("error ",error.message))
    }
   
  const handleSubmit= async(e)=>{
- console.log("url",URLB)
+ console.log("token",token)
 
-  await Axios.post(`${URLB}/tasks`,{title,category,createdBy})
+  await Axios.post(`${URLB}/tasks`,{title,category,createdBy},{
+    headers:{
+    "Authorization":`Bearer ${token}`
+  
+  }})
   .then((res)=>{
    setTimeout(()=>{navigation.navigate('home',{reload:res.data._id})},500)
 

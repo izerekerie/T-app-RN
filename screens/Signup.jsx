@@ -25,7 +25,7 @@ await  AsyncStorage.setItem("token",JSON.stringify(user.token))
         ).catch((error)=>console.log(error.message.details[0]))
     }
   return (
-    <View>
+    <View  style={styles.container}>
       
       <Text style={{textAlign:'center',fontSize:20,fontWeight:'700',padding:10,color:'#1A124A'}}>Sign up </Text>
       <TextInput
@@ -88,7 +88,7 @@ const styles=StyleSheet.create({
         flex:1,
         alignItems:'center',
         padding:10,
-        justifyContent:'center',
+      
       
     },
     button:{
