@@ -5,6 +5,7 @@ import Welcome from './screens/Welcome';
 import Category from './screens/Category';
 import AddCategory from './screens/AddCategory';
 import TaskDetails from './screens/TaskDetails';
+import Signup from './screens/Signup';
 import AddTask from './screens/AddTask';
 import EditTask from './screens/EditTask';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,8 +22,9 @@ const getToken=async()=>{
 getToken();
   return (
    <NavigationContainer>
-    <Stack.Navigator  initialRouteName='welcome' >
+    <Stack.Navigator  initialRouteName='signup' >
       <Stack.Screen component={Welcome} name="welcome" options={{headerShown:false}}/>
+      <Stack.Screen component={Signup} name='signup' options={{headerShown:false}}/>
       <Stack.Screen component={Home} name='home' options={{headerShown:false}} />
       <Stack.Screen component={LoginForm} name="login" options={{headerShown:false}} />
       <Stack.Screen component={TaskDetails}  options={{headerShown:false}} name='task' />
