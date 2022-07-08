@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import Axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View,TextInput,Text,TouchableOpacity, StyleSheet } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
 import URLB from '../util'
 export default function LoginForm({navigation}) {
    const [email,setEmail]=useState('');
@@ -28,6 +30,8 @@ await  AsyncStorage.setItem("token",JSON.stringify(user.token))
     <View style={styles.container}>
 
         <Text style={{textAlign:'center',fontSize:20,fontWeight:'700',padding:10,color:'#1A124A'}}>Login Form</Text>
+        <View style={styles.group}>
+        <MaterialIcons  style={styles.icon} name="email" size={24} color="black" />
         <TextInput
          name="email"
          value={email}
@@ -35,7 +39,10 @@ await  AsyncStorage.setItem("token",JSON.stringify(user.token))
          onChangeText={(val)=>setEmail(val)}
          style={styles.input}
         />
-         <TextInput
+        </View>
+          <View style={styles.group}>
+          <FontAwesome style={styles.icon} name="lock" size={24} color="black" />
+          <TextInput
          
          name="password"
          value={password}
@@ -43,6 +50,8 @@ await  AsyncStorage.setItem("token",JSON.stringify(user.token))
          onChangeText={(val)=>setPassword(val)}
          style={styles.input}
         />
+          </View>
+      
          <TouchableOpacity 
          onPress={handleSubmit}
           style={styles.button}
@@ -68,11 +77,11 @@ const styles=StyleSheet.create({
         padding:10
        },
     input:{
-        padding:10,
-        width:'80%',
-        borderWidth:1,
-        borderColor:'#1A124A',
-        margin:10
+        padding:5,
+       
+        // borderWidth:1,
+        // borderColor:'#1A124A',
+        
 
     },
     container:{
@@ -87,5 +96,16 @@ const styles=StyleSheet.create({
         padding:10,
         width:'80%',
         margin:10
+    },
+    icon:{
+    padding:10
+    },
+    group:{
+        width:'80%',
+        marginVertical:10,
+        borderWidth:1,
+         borderColor:'#1A124A',
+        flexDirection:'row',
+
     }
 })

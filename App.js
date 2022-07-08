@@ -23,7 +23,7 @@ const getToken=async()=>{
 getToken();
   return (
    <NavigationContainer>
-    <Stack.Navigator  initialRouteName='form' >
+    <Stack.Navigator  initialRouteName='login' >
       <Stack.Screen component={Welcome} name="welcome" options={{headerShown:false}}/>
       <Stack.Screen component={Signup} name='signup' options={{headerShown:false}}/>
       <Stack.Screen component={Home} name='home' options={{headerShown:false}} />

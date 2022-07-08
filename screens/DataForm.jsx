@@ -24,10 +24,20 @@ const login=()=>{
         validationSchema={loginValidationSchema}
         initialValues={{email:'',password:''}}
         
-        onSubmit={
-          
-            ()=>navigation.navigate('home')
-        }
+        onSubmit={async(values)=>{
+          const data={
+           
+            email:values.email,password:values.password,
+     
+          }
+          await Axios.post(`${URLB}/users/signin`,data).then(
+            (response)=>{
+                setData(response.data)
+               
+             setTimeout(()=>{navigation.navigate('home')},300)
+            }
+        ).catch((error)=>console.log(error.message))
+        }}
         >
           {({handleChange,handleSubmit,values,errors,isValid})=>(
             <>
